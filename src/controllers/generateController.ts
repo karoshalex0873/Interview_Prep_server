@@ -9,7 +9,7 @@ interface questionsRequest extends Request {
   body: {
     role: string;
     level: string;
-    techStack: string;
+    techstack: string;
     type: string;
     amount: number;
     questions: string[];
@@ -21,7 +21,7 @@ const QuestionsInterview = AppDataSource.getRepository(Interview);
 
 export const generateQuestions = asyncHandler(
   async (req: questionsRequest, res: Response) => {
-    const { role, level, techStack, type, amount } = req.body;
+    const { role, level, techstack, type, amount } = req.body;
 
 
     if (!process.env.GOOGLE_GEMINI_API_KEY) {
@@ -33,26 +33,33 @@ export const generateQuestions = asyncHandler(
     const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
     // Generate content
-    const prompt = `Prepare questions for a job interview.
-        The job role is ${role}.
-        The job experience level is ${level}.
-        The tech stack used in the job is: ${techStack}.
-        The focus between behavioural and technical questions should lean towards: ${type}.
-        The amount of questions required is: ${amount}.
-        Please return only the questions, without any additional text.
-        The questions are going to be read by a voice assistant so do not use "/" or "*" or any other special characters which might break the voice assistant.
-        Return the questions formatted like this:
-        ["Question 1", "Question 2", "Question 3"]
-        
-        Thank you! <3
-    `;
+    const prompt = `Prepare ${amount} questions for a job interview.
+      The job role is ${role}.
+      The job experience level is ${level}.
+      The tech stack used in the job is: ${techstack}.
+      The focus between behavioural and technical questions should lean towards: ${type}.
 
+      Return only the questions, as raw plain text.
+      Each question must be on a new line.
+      Do not use JSON formatting, brackets, dashes, numbers, or any special characters.
+      Do not include an introduction or summary.
+
+      Example format:
+      What are your strengths?
+      Describe a challenging project you've worked on.
+      How would you handle a technical issue in production?
+
+      Thank you!`;
+
+    
     const result = await model.generateContent(prompt);
     const response = await result.response;
     const text = response.candidates?.[0]?.content?.parts?.[0]?.text ?? "";
 
 
-    const questions = text.split('\n').filter((q) => q.trim());
+    const questions = text.split('\n')
+    .filter(line => line.trim())
+    .map(line => line.replace(/^- /, '').trim());
 
 
 
@@ -60,7 +67,7 @@ export const generateQuestions = asyncHandler(
     const newInterview = QuestionsInterview.create({
       role,
       level,
-      techStack,
+      techstack,
       type,
       amount,
       questions,

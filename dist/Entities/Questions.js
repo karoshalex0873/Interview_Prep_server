@@ -29,7 +29,7 @@ __decorate([
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Interview.prototype, "techStack", void 0);
+], Interview.prototype, "techstack", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)

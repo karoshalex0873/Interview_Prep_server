@@ -12,7 +12,7 @@ export class Interview extends BaseEntity {
   level!: string; // e.g., "Junior", "Mid-Level", "Senior"
 
   @Column()
-  techStack!: string; // e.g., "JavaScript, React, Node.js"
+  techstack!: string; // e.g., "JavaScript, React, Node.js"
 
   @Column()
   type!: string; // e.g., "Behavioral", "System Design", "Coding"
