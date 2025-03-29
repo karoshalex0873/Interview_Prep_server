@@ -14,6 +14,7 @@ const typeorm_1 = require("typeorm");
 const Post_1 = require("./Post");
 let User = class User extends typeorm_1.BaseEntity {
 };
+exports.User = User;
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
     __metadata("design:type", Number)
@@ -38,7 +39,6 @@ __decorate([
     (0, typeorm_1.OneToMany)(() => Post_1.Post, (post) => post.user),
     __metadata("design:type", Array)
 ], User.prototype, "posts", void 0);
-User = __decorate([
+exports.User = User = __decorate([
     (0, typeorm_1.Entity)()
 ], User);
-exports.User = User;

@@ -13,6 +13,7 @@ exports.Interview = void 0;
 const typeorm_1 = require("typeorm");
 let Interview = class Interview extends typeorm_1.BaseEntity {
 };
+exports.Interview = Interview;
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
     __metadata("design:type", Number)
@@ -41,7 +42,6 @@ __decorate([
     (0, typeorm_1.Column)("simple-array", { nullable: true }),
     __metadata("design:type", Array)
 ], Interview.prototype, "questions", void 0);
-Interview = __decorate([
+exports.Interview = Interview = __decorate([
     (0, typeorm_1.Entity)()
 ], Interview);
-exports.Interview = Interview;

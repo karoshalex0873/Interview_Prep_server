@@ -14,6 +14,7 @@ const typeorm_1 = require("typeorm");
 const User_1 = require("./User");
 let Post = class Post extends typeorm_1.BaseEntity {
 };
+exports.Post = Post;
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
     __metadata("design:type", Number)
@@ -38,7 +39,6 @@ __decorate([
     (0, typeorm_1.ManyToOne)(() => User_1.User, (user) => user.posts, { onDelete: "CASCADE" }),
     __metadata("design:type", User_1.User)
 ], Post.prototype, "user", void 0);
-Post = __decorate([
+exports.Post = Post = __decorate([
     (0, typeorm_1.Entity)()
 ], Post);
-exports.Post = Post;
