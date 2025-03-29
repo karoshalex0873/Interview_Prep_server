@@ -20,8 +20,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 
-app.get('/get',(req,res)=>{
-  res.send("hello world")
+app.get('',(req,res)=>{
+  res.send("Welcome to the server!");
 })
 // rouers from midllewares
 app.use('/api/v1/auth',authRoutes)

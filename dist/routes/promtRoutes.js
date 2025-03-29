@@ -9,4 +9,6 @@ const generateController_1 = require("../controllers/generateController");
 const router = express_1.default.Router();
 //create a new post
 router.post('/get', generateController_1.generateQuestions);
+router.get('/getall', generateController_1.getAllQuestions);
+router.post('/response', generateController_1.submitResponse);
 exports.default = router;

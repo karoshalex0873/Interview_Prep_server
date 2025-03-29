@@ -18,14 +18,16 @@ const PORT = process.env.PORT;
 // middleware to parse json request bodies
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
-app.get('/get', (req, res) => {
-    res.send("hello world");
+app.get('', (req, res) => {
+    res.send("Welcome to the server!");
 });
 // rouers from midllewares
 app.use('/api/v1/auth', authRoutes_1.default);
 //router for post
 app.use('/api/v1/post', postRoutes_1.default);
 //router for questions
+app.use('/api/v1/questions', promtRoutes_1.default);
+app.use('/api/v1/questions', promtRoutes_1.default);
 app.use('/api/v1/questions', promtRoutes_1.default);
 data_source_1.AppDataSource.initialize()
     .then(() => console.log("🚀 Database connected succsefully"))
