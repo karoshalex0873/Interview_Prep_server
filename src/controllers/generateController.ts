@@ -77,3 +77,12 @@ export const generateQuestions = asyncHandler(
     });
   }
 );
+
+//get all the questions
+
+export const getAllQuestions = asyncHandler(
+  async (_req: Request, res: Response) => {
+    const questions = await QuestionsInterview.find()
+    res.status(200).json({ questions });
+  }
+);

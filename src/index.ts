@@ -31,6 +31,7 @@ app.use('/api/v1/post',postRoutes)
 
 //router for questions
 app.use('/api/v1/questions',promtRoutes)
+app.use('/api/v1/questions',promtRoutes)
 
 AppDataSource.initialize()
 .then(()=>console.log("🚀 Database connected succsefully"))
