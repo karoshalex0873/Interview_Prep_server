@@ -14,10 +14,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.submitResponse = exports.getAllQuestions = exports.generateQuestions = void 0;
 const data_source_1 = require("../config/data-source");
-const Questions_1 = require("../Entities/Questions");
+const Interview_1 = require("../Entities/Interview");
 const asyncHandler_1 = __importDefault(require("../midllewares/asyncHandler"));
 const generative_ai_1 = require("@google/generative-ai");
-const QuestionsInterview = data_source_1.AppDataSource.getRepository(Questions_1.Interview);
+const QuestionsInterview = data_source_1.AppDataSource.getRepository(Interview_1.Interview);
 exports.generateQuestions = (0, asyncHandler_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a, _b, _c, _d, _e, _f;
     const { role, level, techstack, type, amount } = req.body;
@@ -66,7 +66,7 @@ exports.generateQuestions = (0, asyncHandler_1.default)((req, res) => __awaiter(
         questions,
     });
 }));
-//get all the questions
+//get all only
 exports.getAllQuestions = (0, asyncHandler_1.default)((_req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield QuestionsInterview.find();
     res.status(200).json({ result });

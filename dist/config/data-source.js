@@ -7,8 +7,8 @@ exports.AppDataSource = void 0;
 const typeorm_1 = require("typeorm");
 const dotenv_1 = __importDefault(require("dotenv"));
 const User_1 = require("../Entities/User");
-const Post_1 = require("../Entities/Post");
-const Questions_1 = require("../Entities/Questions");
+const Interview_1 = require("../Entities/Interview");
+const Response_1 = require("../Entities/Response");
 dotenv_1.default.config();
 const isProduction = process.env.NODE_ENV === 'production';
 exports.AppDataSource = new typeorm_1.DataSource(isProduction ?
@@ -18,7 +18,7 @@ exports.AppDataSource = new typeorm_1.DataSource(isProduction ?
         url: process.env.DB_URL,
         synchronize: true,
         logging: false,
-        entities: [User_1.User, Post_1.Post, Questions_1.Interview],
+        entities: [User_1.User, Interview_1.Interview, Response_1.Response],
         ssl: true,
         extra: {
             ssl: {
@@ -38,6 +38,6 @@ exports.AppDataSource = new typeorm_1.DataSource(isProduction ?
             database: process.env.LOCAL_DB_NAME,
             synchronize: true,
             logging: false,
-            entities: [User_1.User, Post_1.Post, Questions_1.Interview]
+            entities: [User_1.User, Response_1.Response, Interview_1.Interview]
         });
 // Initialize and test connection

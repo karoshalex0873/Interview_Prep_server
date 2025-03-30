@@ -9,53 +9,49 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.User = void 0;
+exports.Interview = void 0;
 const typeorm_1 = require("typeorm");
-const Interview_1 = require("./Interview");
+const User_1 = require("./User");
 const Response_1 = require("./Response");
-let User = class User extends typeorm_1.BaseEntity {
+let Interview = class Interview extends typeorm_1.BaseEntity {
 };
-exports.User = User;
+exports.Interview = Interview;
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
     __metadata("design:type", Number)
-], User.prototype, "user_id", void 0);
+], Interview.prototype, "interviewId", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], User.prototype, "name", void 0);
-__decorate([
-    (0, typeorm_1.Column)({ unique: true }),
-    __metadata("design:type", String)
-], User.prototype, "email", void 0);
+], Interview.prototype, "role", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], User.prototype, "password", void 0);
+], Interview.prototype, "level", void 0);
 __decorate([
-    (0, typeorm_1.CreateDateColumn)({
-        type: "timestamp",
-        default: () => "CURRENT_TIMESTAMP"
-    }),
-    __metadata("design:type", Date)
-], User.prototype, "createdAt", void 0);
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], Interview.prototype, "techstack", void 0);
 __decorate([
-    (0, typeorm_1.UpdateDateColumn)({
-        type: "timestamp",
-        default: () => "CURRENT_TIMESTAMP"
-    }),
-    __metadata("design:type", Date
-    // Relationships
-    )
-], User.prototype, "updatedAt", void 0);
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], Interview.prototype, "type", void 0);
 __decorate([
-    (0, typeorm_1.OneToMany)(() => Interview_1.Interview, (interview) => interview.user),
+    (0, typeorm_1.Column)({ type: 'integer' }),
+    __metadata("design:type", Number)
+], Interview.prototype, "amount", void 0);
+__decorate([
+    (0, typeorm_1.Column)("simple-array"),
     __metadata("design:type", Array)
-], User.prototype, "interviews", void 0);
+], Interview.prototype, "questions", void 0);
 __decorate([
-    (0, typeorm_1.OneToMany)(() => Response_1.Response, (response) => response.user),
+    (0, typeorm_1.ManyToOne)(() => User_1.User, (user) => user.interviews),
+    __metadata("design:type", User_1.User)
+], Interview.prototype, "user", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(() => Response_1.Response, (response) => response.interview),
     __metadata("design:type", Array)
-], User.prototype, "responses", void 0);
-exports.User = User = __decorate([
+], Interview.prototype, "responses", void 0);
+exports.Interview = Interview = __decorate([
     (0, typeorm_1.Entity)()
-], User);
+], Interview);

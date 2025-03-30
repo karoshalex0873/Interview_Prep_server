@@ -7,7 +7,6 @@ const express_1 = __importDefault(require("express"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const data_source_1 = require("./config/data-source");
 const authRoutes_1 = __importDefault(require("./routes/authRoutes"));
-const postRoutes_1 = __importDefault(require("./routes/postRoutes"));
 const promtRoutes_1 = __importDefault(require("./routes/promtRoutes"));
 dotenv_1.default.config();
 //instace of express
@@ -21,10 +20,10 @@ app.use(express_1.default.urlencoded({ extended: true }));
 app.get('', (req, res) => {
     res.send("Welcome to the server !");
 });
-// rouers from midllewares
+// Authentication router
 app.use('/api/v1/auth', authRoutes_1.default);
 //router for post
-app.use('/api/v1/post', postRoutes_1.default);
+// app.use('/api/v1/post',postRoutes)
 //router for questions
 app.use('/api/v1/questions', promtRoutes_1.default);
 data_source_1.AppDataSource.initialize()

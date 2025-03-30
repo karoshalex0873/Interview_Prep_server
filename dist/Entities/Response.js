@@ -9,53 +9,41 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.User = void 0;
+exports.Response = void 0;
 const typeorm_1 = require("typeorm");
+const User_1 = require("./User");
 const Interview_1 = require("./Interview");
-const Response_1 = require("./Response");
-let User = class User extends typeorm_1.BaseEntity {
+let Response = class Response extends typeorm_1.BaseEntity {
 };
-exports.User = User;
+exports.Response = Response;
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
     __metadata("design:type", Number)
-], User.prototype, "user_id", void 0);
+], Response.prototype, "responseId", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], User.prototype, "name", void 0);
+], Response.prototype, "questionText", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ unique: true }),
+    (0, typeorm_1.Column)('text'),
     __metadata("design:type", String)
-], User.prototype, "email", void 0);
+], Response.prototype, "userResponse", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
-    __metadata("design:type", String)
-], User.prototype, "password", void 0);
+    (0, typeorm_1.Column)('simple-array'),
+    __metadata("design:type", Array)
+], Response.prototype, "feedback", void 0);
 __decorate([
-    (0, typeorm_1.CreateDateColumn)({
-        type: "timestamp",
-        default: () => "CURRENT_TIMESTAMP"
-    }),
+    (0, typeorm_1.CreateDateColumn)(),
     __metadata("design:type", Date)
-], User.prototype, "createdAt", void 0);
+], Response.prototype, "createdAt", void 0);
 __decorate([
-    (0, typeorm_1.UpdateDateColumn)({
-        type: "timestamp",
-        default: () => "CURRENT_TIMESTAMP"
-    }),
-    __metadata("design:type", Date
-    // Relationships
-    )
-], User.prototype, "updatedAt", void 0);
+    (0, typeorm_1.ManyToOne)(() => User_1.User, (user) => user.responses),
+    __metadata("design:type", User_1.User)
+], Response.prototype, "user", void 0);
 __decorate([
-    (0, typeorm_1.OneToMany)(() => Interview_1.Interview, (interview) => interview.user),
-    __metadata("design:type", Array)
-], User.prototype, "interviews", void 0);
-__decorate([
-    (0, typeorm_1.OneToMany)(() => Response_1.Response, (response) => response.user),
-    __metadata("design:type", Array)
-], User.prototype, "responses", void 0);
-exports.User = User = __decorate([
+    (0, typeorm_1.ManyToOne)(() => Interview_1.Interview, (interview) => interview.responses),
+    __metadata("design:type", Interview_1.Interview)
+], Response.prototype, "interview", void 0);
+exports.Response = Response = __decorate([
     (0, typeorm_1.Entity)()
-], User);
+], Response);
