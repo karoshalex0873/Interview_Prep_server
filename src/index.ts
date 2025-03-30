@@ -2,7 +2,6 @@ import express from 'express';
 import dotenv from 'dotenv';
 import { AppDataSource } from './config/data-source';
 import authRoutes from './routes/authRoutes';
-import postRoutes from './routes/postRoutes';
 import promtRoutes from './routes/promtRoutes';
 
 dotenv.config();
@@ -23,11 +22,11 @@ app.use(express.urlencoded({ extended: true }));
 app.get('',(req,res)=>{
   res.send("Welcome to the server !");
 })
-// rouers from midllewares
+// Authentication router
 app.use('/api/v1/auth',authRoutes)
 
 //router for post
-app.use('/api/v1/post',postRoutes)
+// app.use('/api/v1/post',postRoutes)
 
 //router for questions
 app.use('/api/v1/questions',promtRoutes)

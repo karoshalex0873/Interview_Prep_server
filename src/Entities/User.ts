@@ -1,29 +1,45 @@
-import { BaseEntity, Column, CreateDateColumn, Entity, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { Post } from "./Post";
-
+import {
+  BaseEntity,
+  Column,
+  CreateDateColumn,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn
+} from "typeorm";
+import { Interview } from "./Interview";
+import { Response } from "./Response";
 
 @Entity()
-export class User extends BaseEntity { 
+export class User extends BaseEntity {
   @PrimaryGeneratedColumn()
-  id!: number;
+  user_id!: number;
 
   @Column()
   name!: string;
 
-  @Column()
+  @Column({ unique: true })
   email!: string;
 
   @Column()
   password!: string;
-  
-  @CreateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
+
+  @CreateDateColumn({
+    type: "timestamp",
+    default: () => "CURRENT_TIMESTAMP"
+  })
   createdAt!: Date;
-  
-  // foreign key to post
-  @OneToMany(() => Post, (post) => post.user)
-  posts!: Post[];
+
+  @UpdateDateColumn({
+    type: "timestamp",
+    default: () =>"CURRENT_TIMESTAMP"
+  })
+  updatedAt!:Date
+
+  // Relationships
+  @OneToMany(() => Interview, (interview) => interview.user)
+  interviews!: Interview[];
+
+  @OneToMany(() => Response, (response) => response.user)
+  responses!: Response[];
 }
-
-
-
-

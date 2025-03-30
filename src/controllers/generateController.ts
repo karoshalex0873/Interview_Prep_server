@@ -1,20 +1,14 @@
 import { Request, Response } from "express";
 import { AppDataSource } from "../config/data-source";
-import { Interview } from "../Entities/Questions";
+import { Interview } from "../Entities/Interview";
 import asyncHandler from "../midllewares/asyncHandler";
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import { questionsRequest } from "../utils/types/questions";
+import { ResponseRequest } from "../utils/types/response";
 
 
-interface questionsRequest extends Request {
-  body: {
-    role: string;
-    level: string;
-    techstack: string;
-    type: string;
-    amount: number;
-    questions: string[];
-  };
-}
+
+
 
 
 const QuestionsInterview = AppDataSource.getRepository(Interview);
@@ -51,15 +45,15 @@ export const generateQuestions = asyncHandler(
 
       Thank you!`;
 
-    
+
     const result = await model.generateContent(prompt);
     const response = await result.response;
     const text = response.candidates?.[0]?.content?.parts?.[0]?.text ?? "";
 
 
     const questions = text.split('\n')
-    .filter(line => line.trim())
-    .map(line => line.replace(/^- /, '').trim());
+      .filter(line => line.trim())
+      .map(line => line.replace(/^- /, '').trim());
 
 
 
@@ -83,7 +77,7 @@ export const generateQuestions = asyncHandler(
   }
 );
 
-//get all the questions
+//get all only
 
 export const getAllQuestions = asyncHandler(
   async (_req: Request, res: Response) => {
@@ -94,12 +88,7 @@ export const getAllQuestions = asyncHandler(
 
 
 
-interface ResponseRequest extends Request {
-  body: {
-    question: string;
-    userResponse: string;
-  };
-}
+
 
 export const submitResponse = asyncHandler(
   async (req: ResponseRequest, res: Response) => {
