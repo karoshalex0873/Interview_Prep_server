@@ -1,13 +1,13 @@
-import { 
-  Entity, 
-  PrimaryGeneratedColumn, 
-  Column, 
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
   ManyToOne,
   OneToMany,
   BaseEntity
 } from "typeorm";
 import { User } from "./User";
-import { Response } from "./Response";
+import { InterviewResponse, } from "./interviewResponse";
 
 @Entity()
 export class Interview extends BaseEntity {
@@ -36,6 +36,6 @@ export class Interview extends BaseEntity {
   @ManyToOne(() => User, (user) => user.interviews)
   user!: User;
 
-  @OneToMany(() => Response, (response) => response.interview)
+  @OneToMany(() => InterviewResponse, (response) => response.interview)
   responses!: Response[];
 }

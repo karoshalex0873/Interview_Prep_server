@@ -2,7 +2,7 @@ import { DataSource } from "typeorm";
 import dotenv from 'dotenv';
 import { User } from "../Entities/User";
 import { Interview } from "../Entities/Interview";
-import { Response } from "../Entities/Response";
+import { InterviewResponse, } from "../Entities/interviewResponse";
 
 
 dotenv.config();
@@ -17,7 +17,7 @@ export const AppDataSource = new DataSource(
       url: process.env.DB_URL,
       synchronize: true,
       logging: false,
-      entities: [User,Interview,Response],
+      entities: [User, Interview, InterviewResponse],
       ssl: true,
       extra: {
         ssl: {
@@ -37,7 +37,7 @@ export const AppDataSource = new DataSource(
       database: process.env.LOCAL_DB_NAME,
       synchronize: true,
       logging: false,
-      entities: [User,Response,Interview]
+      entities: [User, InterviewResponse, Interview]
     }
 );
 

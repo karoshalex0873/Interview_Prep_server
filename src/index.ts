@@ -3,20 +3,30 @@ import dotenv from 'dotenv';
 import { AppDataSource } from './config/data-source';
 import authRoutes from './routes/authRoutes';
 import promtRoutes from './routes/promtRoutes';
+import cookieParser from "cookie-parser";
+import cors from 'cors'
+
 
 dotenv.config();
 
 //instace of express
 const app = express();
 
-// connect to the database
 
 // load port from .env
 const PORT = process.env.PORT
 
 // middleware to parse json request bodies
 app.use(express.json());
+app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
+
+// the cors options
+app.use(cors({
+  origin:["http://localhost:3001"],
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+  credentials:true
+}))
 
 
 app.get('',(req,res)=>{
@@ -40,4 +50,8 @@ AppDataSource.initialize()
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
+
+
+
+
 

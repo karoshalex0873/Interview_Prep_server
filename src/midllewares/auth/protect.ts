@@ -1,4 +1,4 @@
-import { Response, NextFunction } from "express"
+import {  Response, NextFunction } from "express"
 import asyncHandler from "../asyncHandler"
 import jwt from "jsonwebtoken"
 import { AppDataSource } from "../../config/data-source"
@@ -11,6 +11,7 @@ const userInfo=AppDataSource.getRepository(User)
 // proetect middlware
 export const protect = asyncHandler(
   async (req: UserRequest, res: Response, next: NextFunction) => {
+
     let token = req.cookies["access_token"] //only token from cookies
 
     if (!process.env.JWT_SECRET) {

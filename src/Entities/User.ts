@@ -8,7 +8,7 @@ import {
   UpdateDateColumn
 } from "typeorm";
 import { Interview } from "./Interview";
-import { Response } from "./Response";
+import { InterviewResponse } from "./interviewResponse";
 
 @Entity()
 export class User extends BaseEntity {
@@ -32,14 +32,14 @@ export class User extends BaseEntity {
 
   @UpdateDateColumn({
     type: "timestamp",
-    default: () =>"CURRENT_TIMESTAMP"
+    default: () => "CURRENT_TIMESTAMP"
   })
-  updatedAt!:Date
+  updatedAt!: Date
 
   // Relationships
   @OneToMany(() => Interview, (interview) => interview.user)
   interviews!: Interview[];
 
-  @OneToMany(() => Response, (response) => response.user)
-  responses!: Response[];
+  @OneToMany(() => InterviewResponse, (response) => response.user)
+  responses!: InterviewResponse[];
 }
