@@ -7,6 +7,8 @@ import { Response } from 'express';
 dotenv.config();
 
 export const generateToken = (res: Response, userId: string) => {
+
+
   const jwt_secret = process.env.JWT_SECRET;
   const refreshSecret = process.env.REFRESH_TOKEN_SECRET
 
@@ -15,13 +17,13 @@ export const generateToken = (res: Response, userId: string) => {
   }
 
   try {
-    const accessToken = jwt.sign({ userId }, jwt_secret, { expiresIn: '30m' })
+    const accessToken = jwt.sign({ userId: Number(userId) }, jwt_secret, { expiresIn: '30m' });
 
-    const refreshToken = jwt.sign({ userId },refreshSecret, { expiresIn: '30d' })
+    const refreshToken = jwt.sign({ userId: Number(userId) }, refreshSecret, { expiresIn: '30d' })
 
     // access token as HTTPonly secure and samSite=strict
-    res.cookie("access_token",accessToken,{
-      httpOnly:true,
+    res.cookie("access_token", accessToken, {
+      httpOnly: true,
       secure: process.env.NODE_ENV !== 'development',
       sameSite: "strict",
       maxAge: 90 * 60 * 1000,
